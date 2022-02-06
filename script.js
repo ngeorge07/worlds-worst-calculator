@@ -50,9 +50,6 @@ function calculate() {
     newResult.innerText = result;
   }
 
-  setTimeout(() => {
-    resultsList.scrollTop = resultsList.scrollHeight;
-  }, 100);
-
   resultsList.appendChild(newResult);
+  resultsList.scrollTop = resultsList.scrollHeight;
 }
