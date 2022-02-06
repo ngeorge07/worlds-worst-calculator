@@ -2,37 +2,41 @@
 
 const operatorList = document.querySelector("#operator");
 const calcBtn = document.querySelector("#calculate");
+const calc = {
+  "+": function (a, b) {
+    return a + b;
+  },
+  "-": function (a, b) {
+    return a - b;
+  },
+  "*": function (a, b) {
+    return a * b;
+  },
+  "/": function (a, b) {
+    return a / b;
+  },
+};
+const resultsList = document.querySelector("#results");
+const firstNrElement = document.querySelector("#firstnumber");
+
+let firstNr;
 
 calcBtn.addEventListener("click", calculate);
 
 function calculate() {
-  const resultsList = document.querySelector("#results");
-
-  const firstNr = parseFloat(document.querySelector("#firstnumber").value);
+  const operator = operatorList.options[operatorList.selectedIndex].text;
+  const newResult = document.createElement("li");
   const secondNr = parseFloat(document.querySelector("#secondnumber").value);
 
-  const operator = operatorList.options[operatorList.selectedIndex].text;
-  const result = document.createElement("li");
+  firstNr = parseFloat(firstNrElement.value);
 
-  const calc = {
-    "+": function (a, b) {
-      return a + b;
-    },
-    "-": function (a, b) {
-      return a - b;
-    },
-    "*": function (a, b) {
-      return a * b;
-    },
-    "/": function (a, b) {
-      return a / b;
-    },
-  };
-
-  result.innerText = calc[operator](firstNr, secondNr);
+  const result = calc[operator](firstNr, secondNr);
+  firstNrElement.value = result;
+  newResult.innerText = result;
 
   setTimeout(() => {
     resultsList.scrollTop = resultsList.scrollHeight;
   }, 100);
-  resultsList.appendChild(result);
+
+  resultsList.appendChild(newResult);
 }
