@@ -1,12 +1,13 @@
 "use strict";
 
-const resultsList = document.querySelector("#results");
 const operatorList = document.querySelector("#operator");
 const calcBtn = document.querySelector("#calculate");
 
 calcBtn.addEventListener("click", calculate);
 
 function calculate() {
+  const resultsList = document.querySelector("#results");
+
   const firstNr = parseFloat(document.querySelector("#firstnumber").value);
   const secondNr = parseFloat(document.querySelector("#secondnumber").value);
 
@@ -30,5 +31,8 @@ function calculate() {
 
   result.innerText = calc[operator](firstNr, secondNr);
 
+  setTimeout(() => {
+    resultsList.scrollTop = resultsList.scrollHeight;
+  }, 100);
   resultsList.appendChild(result);
 }
